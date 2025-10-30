@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Student Portfolio — Your Name</title>
+  <meta name="description" content="Simple dark-themed student portfolio." />
+  <style>
+    :root{
+      --bg:#0b0f13;
+      --card:#0f1620;
+      --muted:#9aa6b2;
+      --accent:#7c5cff;
+      --glass: rgba(255,255,255,0.03);
+      --radius:12px;
+      --maxwidth:1000px;
+      --gap:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Roboto, 'Segoe UI', 'Helvetica Neue', Arial;
+      background: linear-gradient(180deg,var(--bg), #061018 120%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      line-height:1.45;
+      padding:40px 18px;
+      display:flex;
+      justify-content:center;
+    }
+    .wrap{width:100%;max-width:var(--maxwidth)}
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:var(--gap);
+      margin-bottom:28px;
+    }
+    .brand{display:flex;gap:14px;align-items:center}
+    .avatar{
+      width:64px;height:64px;border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),#4cc0ff);
+      display:grid;place-items:center;font-weight:700;color:#05102a;font-size:20px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.6);
+    }
+    h1{font-size:20px;margin:0}
+    p.lead{margin:0;color:var(--muted);font-size:14px}
+
+    nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:14px}
+    nav a:hover{color:var(--accent)}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 320px;
+      gap:22px;
+    }
+
+    .card{
+      background:linear-gradient(180deg,var(--card), rgba(20,30,40,0.6));
+      padding:18px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(2,8,16,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    .intro{display:flex;gap:16px;align-items:center}
+    .intro .text h2{margin:0 0 6px 0}
+    .meta{color:var(--muted);font-size:14px}
+
+    section{margin-bottom:18px}
+    .projects .project{padding:14px;border-radius:10px;background:var(--glass);margin-bottom:12px}
+    .project h3{margin:0 0 6px 0;font-size:16px}
+    .project p{margin:0;color:var(--muted);font-size:14px}
+    .skills{display:flex;flex-wrap:wrap;gap:8px}
+    .skill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.03);font-size:13px;color:var(--muted)}
+
+    .contact form{display:flex;flex-direction:column;gap:10px}
+    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.05);padding:10px;border-radius:8px;color:inherit}
+    input::placeholder,textarea::placeholder{color:rgba(230,238,246,0.35)}
+    button{background:linear-gradient(90deg,var(--accent),#4cc0ff);border:none;padding:10px 12px;border-radius:10px;color:#05102a;font-weight:700;cursor:pointer}
+
+    footer{color:var(--muted);font-size:13px;text-align:center;margin-top:18px}
+
+    /* Responsive */
+    @media (max-width:880px){
+      .grid{grid-template-columns:1fr}
+      nav{display:none}
+      .avatar{width:56px;height:56px}
+    }
+
+    /* small utilities */
+    .muted{color:var(--muted)}
+    a.cta{display:inline-block;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.03);text-decoration:none;color:var(--accent);font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="avatar">SN</div>
+        <div>
+          <h1>Your Name</h1>
+          <p class="lead">Student • Computer Science • <span class="muted">Open to internships</span></p>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="grid">
+      <div>
+        <section id="about" class="card intro">
+          <div style="flex:1">
+            <h2>About me</h2>
+            <p class="meta">I am a student passionate about building web apps and learning software engineering. I enjoy clean code, problem solving, and contributing to open source.</p>
+
+            <div style="margin-top:12px">
+              <a class="cta" href="#projects">See my work</a>
+            </div>
+          </div>
+          <div style="width:140px;text-align:center">
+            <!-- small stats -->
+            <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:12px">
+              <div style="font-weight:700;font-size:20px">3</div>
+              <div class="muted" style="font-size:13px">Projects</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="projects" class="card projects">
+          <h2 style="margin-top:0">Projects</h2>
+
+          <div class="project">
+            <h3>Portfolio Website</h3>
+            <p class="muted">A simple static site showcasing my projects and skills. Built with HTML, CSS and a tiny bit of JS.</p>
+          </div>
+
+          <div class="project">
+            <h3>To-do App</h3>
+            <p class="muted">A responsive todo list with localStorage, filters and keyboard shortcuts.</p>
+          </div>
+
+          <div class="project">
+            <h3>Chatbot (Demo)</h3>
+            <p class="muted">A small chatbot project using a lightweight backend (Node/Flask). Includes a demo and docs.</p>
+          </div>
+        </section>
+
+        <section id="skills" class="card">
+          <h2 style="margin-top:0">Skills</h2>
+          <div class="skills" style="margin-top:10px">
+            <div class="skill">HTML</div>
+            <div class="skill">CSS</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">Python</div>
+            <div class="skill">Git</div>
+            <div class="skill">React (basics)</div>
+          </div>
+        </section>
+
+        <section id="contact" class="card contact">
+          <h2 style="margin-top:0">Contact</h2>
+          <p class="muted">Interested in working together? Send a message.</p>
+          <form onsubmit="event.preventDefault();alert('Message sent (demo)')">
+            <input type="text" placeholder="Your name" required />
+            <input type="email" placeholder="Your email" required />
+            <textarea placeholder="Message" rows="4" required></textarea>
+            <div style="display:flex;justify-content:flex-end">
+              <button type="submit">Send</button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <aside>
+        <div class="card">
+          <h3>Quick Info</h3>
+          <p class="muted">Student • BSc/BS in Computer Science • Available for internships</p>
+          <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:12px 0" />
+          <h4 style="margin:0 0 6px 0">Education</h4>
+          <p class="muted" style="margin:0 0 10px 0">Your University — 2nd / 3rd year</p>
+
+          <h4 style="margin:0 0 6px 0">Links</h4>
+          <p style="margin:0 0 6px 0"><a class="muted" href="#">GitHub</a> • <a class="muted" href="#">LinkedIn</a></p>
+
+          <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:12px 0" />
+          <p class="muted" style="font-size:13px">Location: City, Country</p>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="card">
+          <h3>Availability</h3>
+          <p class="muted">Open to internship opportunities and freelance projects.</p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <p>© <span id="year"></span> Your Name • Built with ❤️</p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Smooth scrolling for nav anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+      })
+    });
+  </script>
+</body>
+</html>

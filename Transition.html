@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+
+        }
+        body{
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition-property:background-color ;
+            transition-duration: 3s;
+        }
+        body:hover{
+            background-color: white;
+
+        }
+        .box{
+            height: 100px;
+            width: 100px;
+            background-color: rgb(183, 4, 248);
+            /* transition-property: width,height; */
+            transition-duration: 5s;
+        }
+        .box:hover{
+            width: 200px;
+            height: 200px;
+            transform: translate(-10px,-40px,50px) rotate(120deg) skew(20deg);
+            border-radius: 25%;
+            background-color: rgb(230, 247, 0);
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+        <p>lorem*200</p>
+
+</body>
+</html>

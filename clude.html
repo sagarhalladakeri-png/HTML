@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J&K Career Guidance Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background Images */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f0f0f0" width="1200" height="800"/><g opacity="0.1"><rect x="100" y="100" width="300" height="200" fill="%23000"/><text x="250" y="200" font-size="20" text-anchor="middle" fill="%23666">University Building</text></g><g opacity="0.1"><rect x="700" y="400" width="350" height="250" fill="%23000"/><text x="875" y="525" font-size="20" text-anchor="middle" fill="%23666">Campus View</text></g></svg>') no-repeat center,
+                linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+            z-index: -1;
+            animation: floatBackground 20s ease-in-out infinite;
+        }
+
+        @keyframes floatBackground {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+            50% { text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.5); }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section Styles */
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.8s ease-out;
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .section h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* College Cards */
+        .college-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .college-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .college-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .college-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .college-card h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .college-card p {
+            color: #666;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .placement-info {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .placement-stat {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        /* Quiz Section */
+        .quiz-container {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .quiz-question {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: bounceIn 0.5s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .quiz-question h4 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .quiz-option {
+            padding: 0.8rem;
+            background: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-option::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .quiz-option:hover::before {
+            left: 100%;
+        }
+
+        .quiz-option:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .quiz-option input {
+            margin-right: 0.5rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .skill-category h4 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skill-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            animation: checkMark 0.5s ease-out;
+        }
+
+        @keyframes checkMark {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float 15s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(10px) rotate(-5deg);
+            }
+            75% {
+                transform: translateY(-10px) rotate(3deg);
+            }
+        }
+
+        .floating-element:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { bottom: 30%; left: 10%; animation-delay: 4s; }
+        .floating-element:nth-child(4) { bottom: 10%; right: 5%; animation-delay: 6s; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .college-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Overlay -->
+    <div class="bg-overlay"></div>
+    
+    <!-- Floating Elements -->
+    <div class="floating-element">📚</div>
+    <div class="floating-element">🎓</div>
+    <div class="floating-element">💡</div>
+    <div class="floating-element">🏫</div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">J&K Career Guide</div>
+            <ul class="nav-links">
+                <li><a href="#colleges">Colleges</a></li>
+                <li><a href="#quiz">Skills Quiz</a></li>
+                <li><a href="#skills">Requirements</a></li>
+                <li><a href="#placement">Placements</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>Your Future Starts Here!</h1>
+            <p>Discover the best colleges in Jammu & Kashmir and find your perfect career path</p>
+            <a href="#quiz" class="btn">Take Career Assessment</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Colleges Section -->
+        <div class="section" id="colleges">
+            <h2>Top Government Colleges in Jammu & Kashmir</h2>
+            <div class="college-grid">
+                <div class="college-card">
+                    <h3>University of Kashmir</h3>
+                    <p><strong>Location:</strong> Srinagar</p>
+                    <p><strong>Courses:</strong> B.A., B.Sc., B.Com, B.Tech, BBA, BCA</p>
+                    <p><strong>Established:</strong> 1948</p>
+                    <div class="placement-info">
+                        <h4>Placement Highlights</h4>
+                        <div class="placement-stat">
+                            <span>Average Package:</span>
+                            <strong>₹4-6 LPA</strong>
+                        </div>
+                        <div class="placement-stat">
+                            <span>Highest Package:</span>
+                            <strong>₹12 LPA</strong>
+                        </div>
+                        <div class="placement-stat">
+                            <span>Top Recruiters:</span>
+                            <strong>TCS, Infosys, Wipro</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="college-card">
+                    <h3>University of Jammu</h3>
+                    <p><strong>Location:</strong> Jammu</p>
+                    <p><strong>Courses:</strong> B.A., B.Sc., B.Com, MBA, MCA, B.Ed</p>
+                    <p><strong>Established:</strong> 1969</p>
+                    <div class="placement-info">
+                        <h4>Placement Highlights</h4>
+                        <div class="placement-stat">
+                            <span>Average Package:</span>
+                            <strong>₹3.5-5 LPA</strong>
+                        </div>
+                        <div class="placement-stat">
+                            <span>Highest Package:</span>
+                            <strong>₹10 LPA</strong>
+                        </div>
+                        <div class="placement-stat">
+                            <span>Top Recruiters:</span>
+                            <strong>HCL, Cognizant, HDFC</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="college-card">
+                    <h3>NIT Srinagar</h3>
+                    <p><strong>Location:</strong> Srinagar</p>
+                    <p><strong>Courses:</strong> B.Tech (CSE, ECE, EEE, ME, CE)</p>
+                    <p><strong>Established:</strong> 1960</p>
+                    <div class="placement-info">
+                        <h4>Placement Highlights</h4>
+                        <div class="placement-stat">
+                            <span>Average Package:</span>
+                            <strong>₹6-8 LPA</strong>
+                        </div>
+                        <div class="placement-stat">
+                            <span>Highest Package:</span>
+                            <strong>₹20 LPA</strong>
+                        </div>
+                        <div class="placement-stat">
+                            <span>Top Recruiters:</span>
+                            <strong>Amazon, Microsoft, Samsung</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="college-card">
+                    <h3>Government College for Women, M.A. Road</h3>
+                    <p><strong>Location:</strong> Srinagar</p>
+                    <p><strong>Courses:</strong> B.A., B.Sc., B.Com, BCA</p>
+                    <p><strong>Established:</strong> 1950</p>
+                    <div class="placement-info">
+                        <h4>Placement Highlights</h4>
+                        <div class="placement-stat">
+                            <span>Average Package:</span>
+                            <strong>₹3-4 LPA</strong>
+                        </div>
+                        <div class="placement-stat">
+                            <span>Highest Package:</span>
+                            <strong>₹7 LPA</strong>
+                        </div>
+                        <div class="placement-stat">
+                            <span>Top Recruiters:</span>
+                            <strong>J&K Bank, SBI, Local IT firms</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="college-card">
+                    <h3>Government Degree College, Baramulla</h3>
+                    <p><strong>Location:</strong> Baramulla</p>
+                    <p><strong>Courses:</strong> B.A., B.Sc., B.Com</p>
+                    <p><strong>Established:</strong> 1960</p>
+                    <div class="placement-info">
+                        <h4>Placement Highlights</h4>
+                        <div class="placement-stat">
+                            <span>Average Package:</span>
+                            <strong>₹2.5-3.5 LPA</strong>
+                        </div>
+                        <div class="placement-stat">
+                            <span>Campus Drives:</span>
+                            <strong>15+ per year</strong>
+                        </div>
+                        <div class="placement-stat">
+                            <span>Placement Rate:</span>
+                            <strong>65%</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="college-card">
+                    <h3>Islamic University of Science & Technology</h3>
+                    <p><strong>Location:</strong> Awantipora, Pulwama</p>
+                    <p><strong>Courses:</strong> B.Tech, B.A., B.Sc., BBA</p>
+                    <p><strong>Established:</strong> 2005</p>
+                    <div class="placement-info">
+                        <h4>Placement Highlights</h4>
+                        <div class="placement-stat">
+                            <span>Average Package:</span>
+                            <strong>₹4-5 LPA</strong>
+                        </div>
+                        <div class="placement-stat">
+                            <span>Highest Package:</span>
+                            <strong>₹15 LPA</strong>
+                        </div>
+                        <div class="placement-stat">
+                            <span>Top Recruiters:</span>
+                            <strong>Accenture, Tech Mahindra</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Assessment Quiz -->
+        <div class="section" id="quiz">
+            <h2>Discover Your Career Path - Skills Assessment Quiz</h2>
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    <h4>1. Which subject do you enjoy the most?</h4>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="science"> Mathematics & Science
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="arts"> Literature & Languages
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="commerce"> Business & Economics
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="tech"> Computers & Technology
+                        </label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <h4>2. What type of work environment do you prefer?</h4>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="lab"> Laboratory/Research
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="office"> Corporate Office
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="creative"> Creative Studio
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="field"> Field Work/Outdoor
+                        </label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <h4>3. What is your strongest skill?</h4>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="analytical"> Analytical Thinking
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="communication"> Communication
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="creative"> Creativity
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="leadership"> Leadership
+                        </label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <h4>4. What motivates you the most?</h4>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="innovation"> Innovation & Discovery
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="helping"> Helping Others
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="money"> Financial Success
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="recognition"> Recognition & Fame
+                        </label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <h4>5. How do you prefer to learn?</h4>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="practical"> Hands-on Practice
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="reading"> Reading & Research
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="visual"> Visual & Videos
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="discussion"> Group Discussions
+                        </label>
+                    </div>
+                </div>
+
+                <button class="btn" onclick="calculateResults()">Get Your Career Recommendation</button>
+                
+                <div id="quiz-results" style="display: none; margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 10px;">
+                    <h3>Your Recommended Career Path:</h3>
+                    <p id="result-text"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Required Section -->
+        <div class="section" id="skills">
+            <h2>Skills Required for College Admission</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>For Science Stream</h4>
+                    <ul class="skill-list">
+                        <li>Strong foundation in Mathematics</li>
+                        <li>Problem-solving abilities</li>
+                        <li>Logical reasoning</li>
+                        <li>Laboratory skills</li>
+                        <li>Computer proficiency</li>
+                        <li>Min. 60% in 10+2 (Science)</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h4>For Commerce Stream</h4>
+                    <ul class="skill-list">
+                        <li>Basic accounting knowledge</li>
+                        <li>Business acumen</li>
+                        <li>Communication skills</li>
+                        <li>Numerical aptitude</li>
+                        <li>Basic economics understanding</li>
+                        <li>Min. 55% in 10+2 (Commerce)</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h4>For Arts/Humanities</h4>
+                    <ul class="skill-list">
+                        <li>Strong language skills</li>
+                        <li>Critical thinking</li>
+                        <li>Writing abilities</li>
+                        <li>Cultural awareness</li>
+                        <li>Research skills</li>
+                        <li>Min. 50% in 10+2 (Any stream)</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h4>For Engineering (B.Tech)</h4>
+                    <ul class="skill-list">
+                        <li>PCM in 10+2 with min. 75%</li>
+                        <li>JEE Main qualification</li>
+                        <li>Strong analytical skills</li>
+                        <li>Programming basics</li>
+                        <li>Technical drawing</li>
+                        <li>Innovation mindset</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h4>General Requirements</h4>
+                    <ul class="skill-list">
+                        <li>Age: 17-25 years</li>
+                        <li>10+2 completed from recognized board</li>
+                        <li>Domicile certificate (for state quota)</li>
+                        <li>English proficiency</li>
+                        <li>Basic computer knowledge</li>
+                        <li>Valid entrance test score (if applicable)</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Soft Skills Needed</h4>
+                    <ul class="skill-list">
+                        <li>Time management</li>
+                        <li>Teamwork & collaboration</li>
+                        <li>Adaptability</li>
+                        <li>Critical thinking</li>
+                        <li>Self-motivation</li>
+                        <li>Presentation skills</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Features -->

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        header{
+            background-color: rgb(0, 170, 255);
+            color: aliceblue;
+            display: flex;
+            height: 10vh;
+            align-items: center;
+            
+        }
+        h1{
+            flex-grow: 5;
+        }
+        nav{
+            display: flex;
+            justify-content: space-between;
+            flex-grow: 2;
+
+        }
+        a{
+            text-decoration: none;
+            color: aliceblue;
+            font-family: cursive;
+            font-size: 1.5rem;
+        }
+        a:hover{
+            color: rgb(247, 4, 4);
+            cursor: pointer;
+        }
+        span{
+            height: 3px;
+            width: 20px;
+            display: block;
+            margin: 3px;
+            background-color: rgb(250, 0, 0);
+        }
+        label{
+            display: none;
+        }
+        input{
+            display: none;
+        }
+        @media screen and (max-width:600px){
+            nav{
+                background-color: rgb(0, 170, 255);
+                position: absolute;
+                top:10vh;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+
+            }
+            label{
+                display: block;
+            }
+            nav{
+                display: none;
+            };
+            input:checked~nav{
+                display: flex;
+                
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>MY WEBSITE</h1>
+        <input type="checkbox" id="nav-btn">
+        <label for="nav-btn"><span></span><span></span><span></span></label>
+        <NAV>
+            <a href="#">Home</a><a href="#">Service</a><a href="#">Account</a><a href="#">Login</a>
+        </NAV>
+    </header>
+</body>
+</html>
